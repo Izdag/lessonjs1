@@ -1,41 +1,57 @@
 // №1
-// let i = 2;
-// mainCycle:
-// while (i < 100) {
-//     i++
-//     let j = 2;
-//     while (j < i) {
-//         if (i % j == 0) continue mainCycle
-//         j++
+// function NumberToObjConverter(num) {
+//     // Переводим в строку, если пришло число
+//     num = num.toString()
+//     if (num.length > 3) {
+//         console.log('Превышена максимальная величина числа')
+//         return {}
 //     }
-//     alert(i)
+//     const numArr = num.split('')
+//     while (numArr.length < 3) {
+//         numArr.unshift(0)
+//     }
+//     return {
+//         hundreds: numArr[0],
+//         dozens: numArr[1],
+//         units: numArr[2],
+//     }
 // }
 
-
+// const num = 579
+// const result = NumberToObjConverter(num)
+// console.log('Результат работы функции с входным параметром, равным ' + num + ':')
+// console.log(result)
 
 // №2
 // let priceArr = [85, 95, 700, 63, 92, 489, 1000]
-// function countBasketPrice(priceArr) {
-//     let pricesSum = 0
-//     for (let i = 0; i < priceArr.length; i++) {
-//         pricesSum += priceArr[i]
-//     }
-//     return pricesSum
-// }
-// const totalPrice = countBasketPrice(priceArr)
-// alert(totalPrice)
-
-
-
-// №3
-// for (let i = 0; i <= 9; alert(i++)) {
-// }
-
-
-// №4
-// let star = ''
-// for (let i = 1; i <= 20; i++) {
-//     star = star + '*'
-//     console.log(star)
-// }
-// console.log(star.length)
+const productsArr = [
+    {
+        name: 'Курица',
+        price: 200,
+    },
+    {
+        name: 'Рыба',
+        price: 340,
+    },
+    {
+        name: 'Креветки',
+        price: 500,
+    },
+    {
+        name: 'Мидии',
+        price: 460,
+    },
+    {
+        name: 'Сливочное пиво',
+        price: 135,
+    },
+]
+function countBasketPrice(productsArr) {
+    let pricesSum = 0
+    for (let i = 0; i < productsArr.length; i++) {
+        pricesSum += productsArr[i].price
+    }
+    return pricesSum
+}
+const totalPrice = countBasketPrice(productsArr)
+alert(totalPrice)
