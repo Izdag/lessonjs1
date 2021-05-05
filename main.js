@@ -1,30 +1,24 @@
 // №1
-// function NumberToObjConverter(num) {
-//     // Переводим в строку, если пришло число
-//     num = num.toString()
-//     if (num.length > 3) {
-//         console.log('Превышена максимальная величина числа')
-//         return {}
-//     }
-//     const numArr = num.split('')
-//     while (numArr.length < 3) {
-//         numArr.unshift(0)
-//     }
-//     return {
-//         hundreds: numArr[0],
-//         dozens: numArr[1],
-//         units: numArr[2],
+// function createChessBoard() {
+//     const chessBoard = document.getElementById('chessBoard')
+//     const chessItemsCount = 8
+//     let isOdd = true
+//     for (let i = 1; i <= chessItemsCount; i++) {
+//         for (let j = 1; j <= chessItemsCount; j++) {
+//             const chessItem = document.createElement('div')
+//             chessItem.classList.add('chess-board-item')
+//             chessBoard.appendChild(chessItem)
+//             if (isOdd) {
+//                 chessItem.classList.add('chess-board-item-odd')
+//             }
+//             isOdd = !isOdd
+//         }
+//         isOdd = !isOdd
 //     }
 // }
 
-// const num = 579
-// const result = NumberToObjConverter(num)
-// console.log('Результат работы функции с входным параметром, равным ' + num + ':')
-// console.log(result)
-
 // №2
-// let priceArr = [85, 95, 700, 63, 92, 489, 1000]
-const productsArr = [
+const basketproducts = [
     {
         name: 'Курица',
         price: 200,
@@ -46,12 +40,31 @@ const productsArr = [
         price: 135,
     },
 ]
-function countBasketPrice(productsArr) {
+function countBasketPrice(basketproducts) {
     let pricesSum = 0
-    for (let i = 0; i < productsArr.length; i++) {
-        pricesSum += productsArr[i].price
+    for (let i = 0; i < basketproducts.length; i++) {
+        pricesSum += basketproducts[i].price
     }
     return pricesSum
 }
-const totalPrice = countBasketPrice(productsArr)
-alert(totalPrice)
+
+function createBasket() {
+    const basket = document.getElementById('basket')
+    const basketContent = document.createElement('div')
+    let basketContentValue = ''
+    if (basketproducts.length) {
+        basketContentValue =
+            `В корзине: ${basketproducts.length} товаров на сумму ${countBasketPrice(basketproducts)} рублей`
+    } else {
+        basketContentValue = 'Корзина пуста'
+    }
+    basketContent.innerHTML = basketContentValue
+    basket.appendChild(basketContent)
+}
+
+function init() {
+    // createChessBoard()
+    createBasket()
+}
+
+window.onload = init
