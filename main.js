@@ -18,7 +18,11 @@
 // }
 
 // №2
-const basketproducts = [
+let basket
+let basketContent
+
+const basketproducts = []
+const productsList = [
     {
         name: 'Курица',
         price: 200,
@@ -31,14 +35,6 @@ const basketproducts = [
         name: 'Креветки',
         price: 500,
     },
-    {
-        name: 'Мидии',
-        price: 460,
-    },
-    {
-        name: 'Сливочное пиво',
-        price: 135,
-    },
 ]
 function countBasketPrice(basketproducts) {
     let pricesSum = 0
@@ -48,9 +44,7 @@ function countBasketPrice(basketproducts) {
     return pricesSum
 }
 
-function createBasket() {
-    const basket = document.getElementById('basket')
-    const basketContent = document.createElement('div')
+function updateBasket() {
     let basketContentValue = ''
     if (basketproducts.length) {
         basketContentValue =
@@ -59,12 +53,38 @@ function createBasket() {
         basketContentValue = 'Корзина пуста'
     }
     basketContent.innerHTML = basketContentValue
+}
+
+function createBasket() {
+    basket = document.getElementById('basket')
+    basketContent = document.createElement('div')
     basket.appendChild(basketContent)
+    updateBasket()
+}
+
+function showProducts() {
+    const productsContainer = document.createElement('div')
+    productsContainer.classList.add('products-container')
+    basket.appendChild(productsContainer)
+    for (let j = 0; j < productsList.length; j++) {
+        const productData = productsList[j]
+        const product = document.createElement('div')
+        product.classList.add('product')
+        product.innerHTML = `Название ${productData.name} - Цена ${productData.price}₽`
+        productsContainer.appendChild(product)
+        const buttonBuy = document.createElement('button')
+        buttonBuy.innerHTML = `Купить`
+        productsContainer.appendChild(buttonBuy)
+        buttonBuy.onclick = () => {
+            basketproducts.push(productData)
+            updateBasket()
+        }
+    }
 }
 
 function init() {
-    // createChessBoard()
     createBasket()
+    showProducts()
 }
 
 window.onload = init
