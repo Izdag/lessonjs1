@@ -21,7 +21,7 @@
 let basket
 let basketContent
 
-const basketproducts = []
+let basketproducts = []
 const productsList = [
     {
         name: 'Курица',
@@ -59,6 +59,13 @@ function createBasket() {
     basket = document.getElementById('basket')
     basketContent = document.createElement('div')
     basket.appendChild(basketContent)
+    const buttonReset = document.createElement('button')
+    buttonReset.innerHTML = `Очистить`
+    basket.appendChild(buttonReset)
+    buttonReset.onclick = () => {
+        basketproducts = []
+        updateBasket()
+    }
     updateBasket()
 }
 
