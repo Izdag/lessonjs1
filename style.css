@@ -21,3 +21,15 @@
 .basketContainer {
     margin: 100px 300px;
 }
+.comment, .address, .busketContent {
+    display: none;
+}
+.activeComment .comment {
+    display: block;
+}
+.activeAddress .address {
+    display: block;
+}
+.activeBasketContent .busketContent {
+    display: block;
+}

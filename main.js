@@ -17,9 +17,12 @@
 //     }
 // }
 
-// №2
+// №7
 let basket
 let basketContent
+const fieldsKeysArr = ['activeBasketContent', 'activeAddress', 'activeComment']
+let currentItemCount = 0
+let prevItemCount = 0
 
 let basketproducts = []
 const productsList = [
@@ -55,17 +58,78 @@ function updateBasket() {
     basketContent.innerHTML = basketContentValue
 }
 
-function createBasket() {
-    basket = document.getElementById('basket')
+function createBasketContentItem() {
     basketContent = document.createElement('div')
-    basket.appendChild(basketContent)
+    const basketContentItem = document.createElement('div')
+    const basketContentContainer = document.createElement('div')
+    basketContentContainer.classList.add('busketContent')
+    basketContentItem.innerHTML = `Состав корзины`
+    basket.appendChild(basketContentItem)
+    basketContentItem.appendChild(basketContentContainer)
+    basketContentContainer.appendChild(basketContent)
     const buttonReset = document.createElement('button')
     buttonReset.innerHTML = `Очистить`
-    basket.appendChild(buttonReset)
+    basketContentContainer.appendChild(buttonReset)
     buttonReset.onclick = () => {
         basketproducts = []
         updateBasket()
     }
+}
+
+function createAddressItem() {
+    const addressItem = document.createElement('div')
+    const addressInput = document.createElement('input')
+    addressInput.classList.add('address')
+    addressItem.innerHTML = `Адрес доставки`
+    basket.appendChild(addressItem)
+    addressItem.appendChild(addressInput)
+}
+
+function createCommentItem() {
+    const commentItem = document.createElement('div')
+    const commentInput = document.createElement('input')
+    commentInput.classList.add('comment')
+    commentItem.innerHTML = `Комментарий`
+    basket.appendChild(commentItem)
+    commentItem.appendChild(commentInput)
+}
+
+function syncCurrentItem() {
+    basket.classList.remove(fieldsKeysArr[prevItemCount])
+    basket.classList.add(fieldsKeysArr[currentItemCount])
+    prevItemCount = currentItemCount
+}
+
+function createControllButtons() {
+    const buttonBack = document.createElement('button')
+    const buttonNext = document.createElement('button')
+    buttonBack.innerHTML = `Назад`
+    buttonNext.innerHTML = `Далее`
+    basket.appendChild(buttonBack)
+    basket.appendChild(buttonNext)
+    buttonBack.onclick = () => {
+        if (currentItemCount !== 0) {
+            currentItemCount--
+            syncCurrentItem()
+        }
+    }
+    buttonNext.onclick = () => {
+        if (currentItemCount < fieldsKeysArr.length - 1) {
+            currentItemCount++
+            syncCurrentItem()
+        }
+    }
+}
+
+function createBasket() {
+    const basketContainer = document.getElementById('basket')
+    basket = document.createElement('div')
+    basketContainer.appendChild(basket)
+    createBasketContentItem()
+    createAddressItem()
+    createCommentItem()
+    createControllButtons()
+    syncCurrentItem()
     updateBasket()
 }
 
