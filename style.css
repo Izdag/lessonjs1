@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.chess-board {
+    width: 240px;
+    height: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+    border: 2px solid black;
+    margin: 100px auto;
+}
+.chess-board-item {
+    width: 30px;
+    height: 30px;
+}
+.chess-board-item-odd {
+    background: black;
+}
+.basketContainer {
+    margin: 100px 300px;
+}
+.comment, .address, .busketContent {
+    display: none;
+}
+.activeComment .comment {
+    display: block;
+}
+.activeAddress .address {
+    display: block;
+}
+.activeBasketContent .busketContent {
+    display: block;
+}
